@@ -12,6 +12,7 @@ const EXEMPLOS = [
     titulo: 'Golpe real do dataset',
     texto: 'lTAU: Voce tem 72.103 pontos vencendo hoje! Troque por DlNHElRO acesse: https://app.va',
   },
+  { titulo: 'Golpe com PONTO$', texto: 'BB: VC TEM 119.947 PONTO$ PROXIMO DO VENCIMENT0. RESGATE: simsclientes.com' },
   { titulo: 'Mensagem legítima', texto: 'TIM: seu pacote de 5GB foi ativado. Pedido TJ152828943BR chega dia 29/01.' },
 ];
 
