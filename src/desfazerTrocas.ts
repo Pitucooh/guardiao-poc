@@ -49,7 +49,18 @@ function converterPedaco(pedaco: string): string | null {
     else if (c in TROCAS) trocaveis++;
   }
   if (letras < 2 || trocaveis === 0) return null;
-  if (/\d{2,}/.test(pedaco)) return null;
+  const sequenciasDeDigitos = /\d{2,}/g;
+  let sequencia: RegExpExecArray | null;
+  while ((sequencia = sequenciasDeDigitos.exec(pedaco)) !== null) {
+    const inicio = sequencia.index;
+    const fim = inicio + sequencia[0].length;
+    const cercadaPorLetras =
+      inicio > 0 &&
+      fim < pedaco.length &&
+      LETRA.test(pedaco[inicio - 1]) &&
+      LETRA.test(pedaco[fim]);
+    if (!cercadaPorLetras) return null;
+  }
   if (trocaveis >= letras) return null;
   // Algum caractere não trocável sobrou (ex.: "2", "8", "9")? Então não é leetspeak.
   for (const c of pedaco) {

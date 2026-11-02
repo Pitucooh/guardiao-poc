@@ -8,6 +8,7 @@ describe('desfazerTrocas: golpes com letras trocadas', () => {
     ['TRANSF0RME', 'TRANSFORME'],
     ['lTAU_CARTOES', 'ITAU_CARTOES'],
     ['sua c0nt4 sera bl0qu3ada', 'sua conta sera bloqueada'],
+    ['bl0qu34d0', 'bloqueado'],
     ['fala @ss1m', 'fala assim'],
     ['envie sua s3nh4', 'envie sua senha'],
     ['pr3m1o', 'premio'],
@@ -45,6 +46,15 @@ describe('desfazerTrocas: mensagens legítimas ficam iguais', () => {
     'TIM: novo pacote de dados de 5GB ativado',
     'responda SIM para contratar 1GB adicional',
     'Sou o Jonas da SIDE (@dideclub)',
+    'Seu CPF 123.456.789-09 foi cadastrado no sistema',
+    'O boleto vence em 15/08/2026',
+    'Pagamento de R$ 1.234,56 confirmado',
+    'Protocolo 2026-119947 registrado com sucesso',
+    'Use o código 2FA para entrar no aplicativo',
+    'MXRF11 valorizou hoje',
+    'Windows10 foi atualizado',
+    'Meu iPhone15 chegou',
+    'A promoção 30HORAS termina hoje',
   ])('"%s" não muda', (entrada) => {
     const r = desfazerTrocas(entrada);
     expect(r.texto).toBe(entrada);
