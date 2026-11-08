@@ -58,37 +58,25 @@ Script: `npx tsx scripts/avaliar-dataset.ts dados/dataset_v7.csv` (3.396 mensage
 - Como percebi: rodei `scripts/avaliar-dataset.ts`. As legítimas marcadas passaram de 0 para 2: avisos da B3 com o fundo imobiliário "MXRF11", que viraria "MXRFii". Lendo a lista de exemplos, vi também que "30HORAS" (de "lTAU'30HORAS") passou a ser convertido, embora seja "30 horas".
 - O certo: dígitos seguidos só podem ser convertidos no meio da palavra, entre letras ("bl0qu34d0"). No começo ou no fim ("MXRF11", "COVID19", "30HORAS") são números legítimos. Os testes passavam porque nenhum caso cobria códigos assim.
 
-**Erro 2 (Copilot, ao explicar o próprio modo agente)**
-- Pedido: "como ativo vc como agent?"
-- O que veio: o Copilot disse que, para ativá-lo como agente, bastava seguir as instruções do `AGENTS.md`.
-- Como percebi: o `AGENTS.md` só tem regras e contexto do projeto. O seletor de modo não aparecia porque o VS Code estava desatualizado; depois de atualizar, a opção "Agent" surgiu no chat.
-- O certo: o modo Agent é escolhido no menu do chat do VS Code. O `AGENTS.md` é lido pelo agente, mas não o liga.
-
-**Erro 3 (Gemini, no mapa do tema)**
+**Erro 2 (Gemini, no mapa do tema)**
 - Pedido: alternativas para tratar letras trocadas num app Expo em TypeScript, e como testar.
 - O que veio: "utilize o Jest (nativo do Expo) para rodar testes unitários".
 - Como percebi: o package.json gerado pelo create-expo-app não tem nenhuma dependência de Jest.
 - O certo: o Jest precisa ser instalado com `npx expo install jest-expo jest @types/jest --dev`, com `"preset": "jest-expo"` no package.json (Expo, Unit testing with Jest).
 
-**Erro 4 (ChatGPT, no mapa do tema)**
+**Erro 3 (ChatGPT, no mapa do tema)**
 - Pedido: o mesmo prompt.
 - O que veio: para retreinar o BERTimbau em Python, indicou como documentação "Hugging Face — Tokenizers", com link para huggingface.co/docs/transformers.js/api/tokenizers.
 - Como percebi: abri o link; a página é do Transformers.js, a biblioteca JavaScript, e não da usada no treinamento em Python.
 - O certo: o treinamento usa a biblioteca transformers do Python (Hugging Face Transformers, Training).
 
-**Erro 5 (Claude, na primeira versão da regra)**
+**Erro 4 (Claude, na primeira versão da regra)**
 - Pedido: escrever `desfazerTrocas` e os testes, sem estragar mensagens legítimas.
 - O que veio: uma regra com 41 testes passando que marcava 8 mensagens legítimas do dataset ("US$ 1.000,00", "pacote de 5GB", "@dideclub").
 - Como percebi: rodando a regra nas 3.396 mensagens do dataset_v7.
 - O certo: os testes foram escritos pela mesma IA que escreveu a regra e só cobriam os casos que ela imaginou. Os casos reais viraram testes, e a regra ganhou exceções para moeda, unidade e perfil.
 
-**Erro 6 (Claude, nas instruções para rodar)**
-- Pedido: montar o projeto com instruções para rodar.
-- O que veio: README sem a versão mínima do Node.
-- Como percebi: `npx expo start` quebrou com `TypeError: URL.parse is not a function` no Node 20.11.1.
-- O certo: o package.json do expo 58 exige Node `^22.13.0 || ^24.3.0`. Atualizei o Node e funcionou.
-
-**Erro 7 (Claude, na escolha do tema)**
+**Erro 5 (Claude, na escolha do tema)**
 - Pedido: sugerir um tema da disciplina a partir da descrição do TCC.
 - O que veio: a IA aceitou que o modelo rodava "na nuvem, no Hugging Face" e recomendou a trilha de Consumo de API.
 - Como percebi: o `OnnxClassifier.kt` roda o modelo com o ONNX Runtime no celular, e o README do app diz que a inferência roda 100% no aparelho.
